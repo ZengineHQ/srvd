@@ -19,6 +19,7 @@ var Image string
 var Tag string
 var Cluster string
 var Services []string
+
 //var Profile string
 var Prefix string
 var Region string
@@ -102,7 +103,7 @@ func worker(queue chan string, id int, done, ks chan bool) {
 			done <- true
 		case <-ks:
 			return
-		case <- time.After(300 * time.Second):
+		case <-time.After(300 * time.Second):
 			log.Printf("Worker %d timed out\n", id)
 			return
 		}
@@ -257,7 +258,7 @@ func getTaskStatus(service types.Service, taskDefinition types.TaskDefinition) (
 		//log.Println(*task.TaskDefinitionArn)
 		//log.Println(*taskDefinition.TaskDefinitionArn)
 		if *task.TaskDefinitionArn == *taskDefinition.TaskDefinitionArn {
-			status = append(status,*task.LastStatus)
+			status = append(status, *task.LastStatus)
 		}
 	}
 
